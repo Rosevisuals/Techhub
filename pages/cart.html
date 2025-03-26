@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart</title>
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="stylesheet" href="../assets/css/product.css">
+    <link rel="stylesheet" href="../assets/css/responsive.css">
+</head>
+<body>
+    <header>
+        <h1>Your Shopping Cart</h1>
+        <nav>
+            <ul>
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="category.html">Categories</a></li>
+                <li><a href="checkout.html">Checkout</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section id="cart-items">
+            <h2>Items in your cart</h2>
+            <ul id="cart-list">
+                <!-- Cart items will be dynamically inserted here -->
+            </ul>
+            <div id="cart-total">
+                <h3>Total Price: <span id="total-price">$0.00</span></h3>
+            </div>
+            <button id="checkout-button">Proceed to Checkout</button>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2023 Gadget E-commerce. All rights reserved.</p>
+    </footer>
+    <script src="../assets/js/cart.js"></script>
+    <script src="../assets/js/main.js"></script>
+</body>
+</html>
