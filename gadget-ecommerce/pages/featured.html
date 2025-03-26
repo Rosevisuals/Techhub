@@ -1,0 +1,973 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Featured Products - TechHub</title>
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="stylesheet" href="../assets/css/product.css">
+    <link rel="stylesheet" href="../assets/css/responsive.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Raleway:wght@700;800&display=swap" rel="stylesheet">
+    <!-- AOS Animation Library -->
+    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    
+    <style>
+        :root {
+            --primary-green: #00A651;
+            --dark-green: #008040;
+            --light-green: #E8F5E9;
+            --accent-green: #4CAF50;
+            --black: #212121;
+            --dark-gray: #424242;
+            --light-gray: #F5F5F5;
+            --white: #FFFFFF;
+        }
+        
+        body {
+            background-color: var(--white);
+            color: var(--black);
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .featured-hero {
+            background: linear-gradient(135deg, var(--dark-green), var(--primary-green));
+            color: var(--white);
+            padding: 6rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .featured-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect fill="none" width="100" height="100"/><rect fill="rgba(255,255,255,0.05)" x="25" width="1" height="100"/><rect fill="rgba(255,255,255,0.05)" x="50" width="1" height="100"/><rect fill="rgba(255,255,255,0.05)" x="75" width="1" height="100"/><rect fill="rgba(255,255,255,0.05)" y="25" width="100" height="1"/><rect fill="rgba(255,255,255,0.05)" y="50" width="100" height="1"/><rect fill="rgba(255,255,255,0.05)" y="75" width="100" height="1"/></svg>');
+            opacity: 0.3;
+        }
+        
+        .featured-hero h1 {
+            font-family: 'Raleway', sans-serif;
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            font-weight: 800;
+        }
+        
+        .featured-hero p {
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+        
+        .featured-filter {
+            background: var(--white);
+            padding: 1rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .featured-filter button {
+            background: var(--light-gray);
+            border: none;
+            padding: 0.5rem 1.5rem;
+            border-radius: 30px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .featured-filter button:hover {
+            background: var(--light-green);
+            color: var(--primary-green);
+        }
+        
+        .featured-filter button.active {
+            background: var(--primary-green);
+            color: var(--white);
+        }
+        
+        .featured-container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+        
+        .featured-section {
+            margin-bottom: 4rem;
+        }
+        
+        .section-header {
+            margin-bottom: 2rem;
+            position: relative;
+            padding-bottom: 1rem;
+        }
+        
+        .section-header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 80px;
+            height: 4px;
+            background: var(--primary-green);
+            border-radius: 2px;
+        }
+        
+        .section-header h2 {
+            font-family: 'Raleway', sans-serif;
+            font-size: 1.8rem;
+            color: var(--black);
+            margin-bottom: 0.5rem;
+        }
+        
+        .section-header p {
+            color: var(--dark-gray);
+            font-size: 1rem;
+        }
+        
+        .featured-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+        
+        .featured-card {
+            background: var(--white);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+        }
+        
+        .featured-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+        }
+        
+        .featured-badge {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            background: var(--primary-green);
+            color: var(--white);
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            z-index: 2;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .featured-img {
+            height: 220px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .featured-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .featured-card:hover .featured-img img {
+            transform: scale(1.08);
+        }
+        
+        .featured-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 1.5rem;
+            background: linear-gradient(transparent, rgba(0,0,0,0.7));
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .featured-card:hover .featured-overlay {
+            opacity: 1;
+        }
+        
+        .featured-overlay-btn {
+            color: var(--white);
+            background: var(--primary-green);
+            border: none;
+            padding: 0.6rem 1.2rem;
+            border-radius: 4px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .featured-overlay-btn:hover {
+            background: var(--dark-green);
+        }
+        
+        .featured-content {
+            padding: 1.5rem;
+        }
+        
+        .featured-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--black);
+        }
+        
+        .featured-category {
+            color: var(--dark-gray);
+            font-size: 0.85rem;
+            margin-bottom: 1rem;
+        }
+        
+        .featured-price {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .price-current {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--primary-green);
+            margin-right: 0.8rem;
+        }
+        
+        .price-original {
+            font-size: 1rem;
+            text-decoration: line-through;
+            color: var(--dark-gray);
+            opacity: 0.7;
+        }
+        
+        .featured-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid #f0f0f0;
+            padding-top: 1rem;
+        }
+        
+        .featured-rating {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+        
+        .rating-stars {
+            color: #FFD700;
+        }
+        
+        .rating-count {
+            font-size: 0.85rem;
+            color: var(--dark-gray);
+        }
+        
+        .featured-add {
+            background: var(--light-green);
+            color: var(--primary-green);
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .featured-add:hover {
+            background: var(--primary-green);
+            color: var(--white);
+            transform: rotate(90deg);
+        }
+        
+        .featured-carousel {
+            margin: 3rem 0;
+            position: relative;
+            padding: 2rem 0;
+        }
+        
+        .carousel-item {
+            background: var(--light-gray);
+            padding: 2rem;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            margin: 1rem 0;
+        }
+        
+        .carousel-image {
+            width: 40%;
+            height: 300px;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .carousel-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .carousel-content {
+            width: 60%;
+        }
+        
+        .carousel-content h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: var(--black);
+        }
+        
+        .carousel-content p {
+            color: var(--dark-gray);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+        
+        .carousel-btn {
+            background: var(--primary-green);
+            color: var(--white);
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 4px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .carousel-btn:hover {
+            background: var(--dark-green);
+        }
+        
+        .testimonial {
+            background: var(--light-green);
+            padding: 4rem 0;
+            margin-top: 3rem;
+        }
+        
+        .testimonial-card {
+            background: var(--white);
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            margin: 1rem;
+            position: relative;
+        }
+        
+        .testimonial-quote {
+            color: var(--primary-green);
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 1.5rem;
+            color: var(--dark-gray);
+            line-height: 1.6;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .author-img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            overflow: hidden;
+        }
+        
+        .author-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .author-name {
+            font-weight: 600;
+            color: var(--black);
+        }
+        
+        .author-title {
+            font-size: 0.85rem;
+            color: var(--dark-gray);
+        }
+        
+        .newsletter {
+            padding: 3rem 0;
+            text-align: center;
+            background: var(--white);
+        }
+        
+        .newsletter-container h2 {
+            font-family: 'Raleway', sans-serif;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+        
+        .newsletter-form {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            max-width: 600px;
+            margin: 1rem auto;
+        }
+        
+        .newsletter-form input {
+            padding: 0.8rem;
+            border: 1px solid var(--light-gray);
+            border-radius: 4px;
+            flex: 1;
+        }
+        
+        .newsletter-form button {
+            background: var(--primary-green);
+            color: var(--white);
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .newsletter-form button:hover {
+            background: var(--dark-green);
+        }
+        
+        .main-footer {
+            background: var(--dark-gray);
+            color: var(--white);
+            padding: 3rem 0;
+        }
+        
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        .footer-column h4 {
+            font-family: 'Raleway', sans-serif;
+            margin-bottom: 1rem;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .footer-column ul li a {
+            color: var(--white);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-column ul li a:hover {
+            color: var(--primary-green);
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 2rem;
+        }
+        
+        @media (max-width: 992px) {
+            .featured-grid {
+                grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            }
+            
+            .carousel-item {
+                flex-direction: column;
+            }
+            
+            .carousel-image, .carousel-content {
+                width: 100%;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .featured-hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .featured-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+                gap: 1.5rem;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .featured-filter {
+                padding: 0.8rem;
+                gap: 0.5rem;
+            }
+            
+            .featured-filter button {
+                padding: 0.4rem 1rem;
+                font-size: 0.9rem;
+            }
+            
+            .featured-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .section-header h2 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="main-header">
+        <div class="header-container" style="max-width: 1200px; margin: 0 auto; padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center;">
+            <div class="logo">
+                <h1><a href="../index.html" style="text-decoration: none; color: var(--black);"><span class="tech">Tech</span><span class="hub" style="color: var(--primary-green);">Hub</span></a></h1>
+            </div>
+            <nav class="main-nav">
+                <ul style="list-style: none; display: flex; gap: 2rem; margin: 0; padding: 0;">
+                    <li><a href="../index.html" style="text-decoration: none; color: var(--black);">Home</a></li>
+                    <li><a href="product.html" style="text-decoration: none; color: var(--black);">Products</a></li>
+                    <li><a href="featured.html" style="text-decoration: none; color: var(--primary-green);" class="active">Featured</a></li>
+                    <li><a href="#about" style="text-decoration: none; color: var(--black);">About</a></li>
+                </ul>
+            </nav>
+            <div class="nav-icons" style="display: flex; gap: 1rem; align-items: center;">
+                <a href="checkout.html" class="cart-icon" style="text-decoration: none; color: var(--black); position: relative;"><i class="fas fa-shopping-cart"></i><span class="cart-count" style="position: absolute; top: -5px; right: -10px; background: var(--primary-green); color: var(--white); border-radius: 50%; width: 18px; height: 18px; display: flex; align-items: center; justify-content: center; font-size: 0.8rem;">0</span></a>
+                <a href="#" class="search-icon" style="text-decoration: none; color: var(--black);"><i class="fas fa-search"></i></a>
+                <a href="#" class="account-icon" style="text-decoration: none; color: var(--black);"><i class="fas fa-user"></i></a>
+                <div class="menu-toggle" style="display: none;"><i class="fas fa-bars"></i></div>
+            </div>
+        </div>
+    </header>
+    
+    <section class="featured-hero" data-aos="fade-in">
+        <div class="hero-content" data-aos="fade-up" data-aos-delay="200">
+            <h1>Featured Products</h1>
+            <p>Discover our hand-picked selection of premium gadgets and tech innovations that stand out from the crowd.</p>
+        </div>
+    </section>
+    
+    <div class="featured-filter" data-aos="fade-down">
+        <button class="active" data-filter="all">All Featured</button>
+        <button data-filter="bestseller">Best Sellers</button>
+        <button data-filter="new">New Arrivals</button>
+        <button data-filter="sale">On Sale</button>
+        <button data-filter="premium">Premium</button>
+    </div>
+    
+    <main class="featured-container">
+        <section class="featured-section">
+            <div class="section-header" data-aos="fade-right">
+                <h2>Top Rated Products</h2>
+                <p>Highly rated by our customers</p>
+            </div>
+            
+            <div class="featured-grid" id="featuredGrid">
+                <!-- Products will be loaded dynamically -->
+            </div>
+        </section>
+        
+        <section class="featured-carousel" data-aos="fade-up">
+            <div class="carousel-item" data-aos="fade-up">
+                <div class="carousel-image" data-aos="fade-right" data-aos-delay="200">
+                    <img src="https://img-prod-cms-rt-microsoft-com.akamaized.net/cms/api/am/imageFileData/RW163Qx?ver=2a93&q=90&m=6&h=300&w=300&b=%23FFFFFFFF&l=f&o=t&aim=true" alt="Surface Laptop">
+                </div>
+                <div class="carousel-content" data-aos="fade-left" data-aos-delay="300">
+                    <h3>Microsoft Surface Laptop 5</h3>
+                    <p>Experience stunning visuals on this touchscreen laptop powered by the latest Intel® processors. Perfect balance of style, performance, and portability for your everyday tasks.</p>
+                    <p class="featured-price">
+                        <span class="price-current">$999.99</span>
+                        <span class="price-original">$1299.99</span>
+                    </p>
+                    <button class="carousel-btn" onclick="addToCart(12)">
+                        <i class="fas fa-shopping-cart"></i> Add to Cart
+                    </button>
+                </div>
+            </div>
+        </section>
+        
+        <section class="featured-section">
+            <div class="section-header" data-aos="fade-right">
+                <h2>Best Selling Audio</h2>
+                <p>Top picks for audiophiles</p>
+            </div>
+            
+            <div class="featured-grid" id="audioGrid">
+                <!-- Audio products will be loaded dynamically -->
+            </div>
+        </section>
+    </main>
+    
+    <section class="testimonial">
+        <div class="featured-container">
+            <div class="section-header" data-aos="fade-right">
+                <h2>What Our Customers Say</h2>
+                <p>Real reviews from tech enthusiasts</p>
+            </div>
+            
+            <div class="featured-grid">
+                <div class="testimonial-card" data-aos="fade-up">
+                    <div class="testimonial-quote">
+                        <i class="fas fa-quote-left"></i>
+                    </div>
+                    <p class="testimonial-text">The Apple MacBook Air M2 exceeded all my expectations. The battery life is incredible and it handles all my design work with ease.</p>
+                    <div class="testimonial-author">
+                        <div class="author-img">
+                            <img src="https://randomuser.me/api/portraits/women/45.jpg" alt="Sarah Johnson">
+                        </div>
+                        <div>
+                            <div class="author-name">Sarah Johnson</div>
+                            <div class="author-title">Graphic Designer</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="testimonial-quote">
+                        <i class="fas fa-quote-left"></i>
+                    </div>
+                    <p class="testimonial-text">The Sony WH-1000XM5 headphones are the best I've ever owned. The noise cancellation is unbeatable, perfect for my daily commute.</p>
+                    <div class="testimonial-author">
+                        <div class="author-img">
+                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Michael Chen">
+                        </div>
+                        <div>
+                            <div class="author-name">Michael Chen</div>
+                            <div class="author-title">Software Engineer</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="testimonial-quote">
+                        <i class="fas fa-quote-left"></i>
+                    </div>
+                    <p class="testimonial-text">I'm extremely impressed with the Samsung Galaxy Watch 5. It tracks my fitness activities accurately and the battery lasts much longer than advertised.</p>
+                    <div class="testimonial-author">
+                        <div class="author-img">
+                            <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Emily Rodriguez">
+                        </div>
+                        <div>
+                            <div class="author-name">Emily Rodriguez</div>
+                            <div class="author-title">Fitness Instructor</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="newsletter">
+        <div class="newsletter-container" data-aos="fade-up">
+            <h2>Stay Updated</h2>
+            <p>Subscribe to our newsletter for the latest product updates and exclusive offers.</p>
+            <form class="newsletter-form" onsubmit="event.preventDefault(); alert('Subscribed!');">
+                <input type="email" placeholder="Enter your email" required>
+                <button type="submit">Subscribe</button>
+            </form>
+        </div>
+    </section>
+    
+    <footer class="main-footer">
+        <div class="footer-container">
+            <div class="footer-column">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="product.html">Products</a></li>
+                    <li><a href="featured.html">Featured</a></li>
+                    <li><a href="checkout.html">Checkout</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Customer Service</h4>
+                <ul>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">FAQs</a></li>
+                    <li><a href="#">Shipping Policy</a></li>
+                    <li><a href="#">Returns & Exchanges</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Legal</h4>
+                <ul>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms & Conditions</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Contact</h4>
+                <ul class="contact-info">
+                    <li><i class="fas fa-map-marker-alt"></i> 123 Tech Street, City, Country</li>
+                    <li><i class="fas fa-phone"></i> +123 456 7890</li>
+                    <li><i class="fas fa-envelope"></i> info@techhub.com</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 TechHub. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Inline JavaScript for demo purposes (normally in product.js and main.js) -->
+    <script>
+        // Sample product data (normally in product.js)
+        function generateProducts() {
+            return [
+                {
+                    id: 1,
+                    name: "Apple MacBook Air M2",
+                    category: "laptop",
+                    brand: "apple",
+                    price: 1199.99,
+                    originalPrice: 1299.99,
+                    rating: 4.8,
+                    reviewCount: 245,
+                    image: "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/macbook-air-m2-starlight-gallery-20220606?wid=4000&hei=3074&fmt=jpeg&qlt=90&.v=1654122098015",
+                    featured: true,
+                    isNew: true,
+                    onSale: false,
+                    isBestseller: false
+                },
+                {
+                    id: 2,
+                    name: "Sony WH-1000XM5",
+                    category: "audio",
+                    brand: "sony",
+                    price: 349.99,
+                    originalPrice: 399.99,
+                    rating: 4.9,
+                    reviewCount: 180,
+                    image: "https://www.sony.com/image/6b873b008ebfa8b90efbf9ae707f6e8f?fmt=pjpeg&wid=330&bgcolor=FFFFFF&bgc=FFFFFF",
+                    featured: true,
+                    isNew: false,
+                    onSale: true,
+                    isBestseller: true
+                },
+                {
+                    id: 3,
+                    name: "Samsung Galaxy Buds 2",
+                    category: "audio",
+                    brand: "samsung",
+                    price: 129.99,
+                    rating: 4.6,
+                    reviewCount: 150,
+                    image: "https://image-us.samsung.com/SamsungUS/home/mobile-accessories/08162021/Galaxy-Buds2_White_Thumb.jpg",
+                    featured: true,
+                    isNew: false,
+                    onSale: false,
+                    isBestseller: true
+                },
+                {
+                    id: 4,
+                    name: "Dell XPS 13",
+                    category: "laptop",
+                    brand: "dell",
+                    price: 999.99,
+                    rating: 4.7,
+                    reviewCount: 200,
+                    image: "https://i.dell.com/is/image/DellContent/content/dam/ss2/product-images/page/category/laptop/xps-13-9320-frl-folio-gray-800x620.png",
+                    featured: true,
+                    isNew: true,
+                    onSale: false,
+                    isBestseller: false
+                }
+            ];
+        }
+
+        // Initialize AOS animations
+        document.addEventListener('DOMContentLoaded', function() {
+            AOS.init({
+                duration: 800,
+                easing: 'ease-in-out',
+                once: false,
+                mirror: false
+            });
+            
+            // Load featured products
+            loadFeaturedProducts();
+            
+            // Update cart count
+            updateCartCount();
+            
+            // Add filter functionality
+            const filterButtons = document.querySelectorAll('.featured-filter button');
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                    const filterValue = this.getAttribute('data-filter');
+                    filterProducts(filterValue);
+                });
+            });
+        });
+        
+        // Load featured products
+        function loadFeaturedProducts() {
+            const allProducts = generateProducts();
+            const featuredProducts = allProducts.filter(product => product.featured);
+            const audioProducts = allProducts.filter(product => 
+                product.category === 'audio' && product.rating >= 4.5
+            ).slice(0, 3);
+            
+            displayProducts(featuredProducts.slice(0, 6), 'featuredGrid');
+            displayProducts(audioProducts, 'audioGrid');
+        }
+        
+        // Display products in a grid
+        function displayProducts(products, containerId) {
+            const container = document.getElementById(containerId);
+            if (!container) return;
+            
+            let html = '';
+            products.forEach(product => {
+                let badgeText = '';
+                if (product.isNew) badgeText = 'New';
+                else if (product.onSale) badgeText = 'Sale';
+                else if (product.isBestseller) badgeText = 'Best Seller';
+                
+                let discountPercent = '';
+                if (product.originalPrice) {
+                    const discount = Math.round((1 - (product.price / product.originalPrice)) * 100);
+                    discountPercent = `<span class="discount-badge">-${discount}%</span>`;
+                }
+                
+                const ratingStars = generateRatingStars(product.rating);
+                
+                html += `
+                    <div class="featured-card" data-aos="fade-up" data-category="${product.category}" 
+                         data-badge="${product.isNew ? 'new' : product.onSale ? 'sale' : product.isBestseller ? 'bestseller' : ''}">
+                        ${badgeText ? `<div class="featured-badge">${badgeText}</div>` : ''}
+                        <div class="featured-img">
+                            <img src="${product.image}" alt="${product.name}">
+                            <div class="featured-overlay">
+                                <button class="featured-overlay-btn" onclick="addToCart(${product.id})">Quick Add</button>
+                            </div>
+                        </div>
+                        <div class="featured-content">
+                            <h3 class="featured-title">${product.name}</h3>
+                            <div class="featured-category">${product.category.charAt(0).toUpperCase() + product.category.slice(1)} • ${product.brand.charAt(0).toUpperCase() + product.brand.slice(1)}</div>
+                            <div class="featured-price">
+                                <span class="price-current">$${product.price.toFixed(2)}</span>
+                                ${product.originalPrice ? `<span class="price-original">$${product.originalPrice.toFixed(2)}</span>` : ''}
+                                ${discountPercent}
+                            </div>
+                            <div class="featured-meta">
+                                <div class="featured-rating">
+                                    <div class="rating-stars">${ratingStars}</div>
+                                    <span class="rating-count">(${product.reviewCount})</span>
+                                </div>
+                                <button class="featured-add" onclick="addToCart(${product.id})" title="Add to cart">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            container.innerHTML = html;
+        }
+        
+        // Generate rating stars
+        function generateRatingStars(rating) {
+            const fullStars = Math.floor(rating);
+            const hasHalfStar = rating % 1 >= 0.5;
+            const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
+            
+            let starsHtml = '';
+            for (let i = 0; i < fullStars; i++) starsHtml += '<i class="fas fa-star"></i>';
+            if (hasHalfStar) starsHtml += '<i class="fas fa-star-half-alt"></i>';
+            for (let i = 0; i < emptyStars; i++) starsHtml += '<i class="far fa-star"></i>';
+            return starsHtml;
+        }
+        
+        // Filter products
+        function filterProducts(filter) {
+            const cards = document.querySelectorAll('.featured-card');
+            cards.forEach(card => {
+                const badge = card.getAttribute('data-badge');
+                if (filter === 'all' || filter === badge || (filter === 'premium' && !badge)) {
+                    card.style.display = 'block';
+                    setTimeout(() => {
+                        card.style.opacity = 1;
+                        card.style.transform = 'translateY(0)';
+                    }, 50);
+                } else {
+                    card.style.opacity = 0;
+                    card.style.transform = 'translateY(20px)';
+                    setTimeout(() => {
+                        card.style.display = 'none';
+                    }, 300);
+                }
+            });
+            setTimeout(() => AOS.refresh(), 500);
+        }
+        
+        // Add to cart
+        function addToCart(productId) {
+            const products = generateProducts();
+            const product = products.find(p => p.id === productId);
+            if (!product) return;
+            
+            let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+            const existingItem = cart.find(item => item.id === productId);
+            if (existingItem) {
+                existingItem.quantity = (existingItem.quantity || 1) + 1;
+            } else {
+                cart.push({ ...product, quantity: 1 });
+            }
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCartCount();
+            alert(`${product.name} added to cart!`);
+        }
+        
+        // Update cart count
+        function updateCartCount() {
+            const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+            const cartCount = cart.reduce((total, item) => total + (item.quantity || 1), 0);
+            const cartCountElement = document.querySelector('.cart-count');
+            if (cartCountElement) {
+                cartCountElement.textContent = cartCount;
+            }
+        }
+    </script>
+</body>
+</html>

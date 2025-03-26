@@ -1,0 +1,401 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechHub | Product Categories</title>
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="stylesheet" href="../assets/css/product.css">
+    <link rel="stylesheet" href="../assets/css/category.css">
+    <link rel="stylesheet" href="../assets/css/responsive.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Raleway:wght@700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.6.1/nouislider.min.css" />
+</head>
+<body>
+    <header class="main-header">
+        <div class="header-container">
+            <div class="logo">
+                <h1><a href="../index.html"><span class="tech">Tech</span><span class="hub">Hub</span></a></h1>
+            </div>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="product.html" class="active">Products</a></li>
+                    <li><a href="featured.html">Featured</a></li>
+                    <li><a href="about.html">About</a></li>
+                </ul>
+            </nav>
+            <div class="nav-icons">
+                <a href="checkout.html" class="cart-icon"><i class="fas fa-shopping-cart"></i><span class="cart-count">0</span></a>
+                <a href="#" class="search-icon"><i class="fas fa-search"></i></a>
+                <a href="#" class="account-icon"><i class="fas fa-user"></i></a>
+                <div class="menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="breadcrumb-container" data-aos="fade-down" data-aos-duration="600">
+        <div class="container">
+            <ul class="breadcrumb">
+                <li><a href="../index.html">Home</a></li>
+                <li class="active" id="category-title">All Products</li>
+            </ul>
+        </div>
+    </div>
+
+    <section class="category-hero">
+        <div class="container">
+            <div class="category-banner" data-aos="zoom-in">
+                <div class="banner-content">
+                    <span class="overline">Premium Selection</span>
+                    <h1 class="category-heading">Explore Our <span class="highlight">Tech Collection</span></h1>
+                    <p class="category-subheading">Discover cutting-edge gadgets designed to enhance your everyday life</p>
+                </div>
+                <div class="banner-image">
+                    <img src="https://images.unsplash.com/photo-1593642702821-c8da6771f0c6?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Tech Collection" class="parallax-element" data-depth="0.2">
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <main class="category-page-container">
+        <div class="container">
+            <div class="filter-toggle-btn" id="filter-toggle">
+                <i class="fas fa-sliders-h"></i> Filters
+            </div>
+            
+            <div class="category-content">
+                <!-- Left side - Filters -->
+                <aside class="product-filters" id="product-filters" data-aos="fade-right" data-aos-duration="800">
+                    <div class="filter-header">
+                        <h3>Filters</h3>
+                        <button class="clear-filters-btn">Clear All</button>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <h4 class="filter-title">Categories</h4>
+                        <ul class="filter-list category-list">
+                            <li>
+                                <label class="custom-checkbox">
+                                    <input type="checkbox" name="category" value="smartphones" checked>
+                                    <span class="checkmark"></span>
+                                    <span class="label-text">Smartphones</span>
+                                    <span class="count">24</span>
+                                </label>
+                            </li>
+                            <li>
+                                <label class="custom-checkbox">
+                                    <input type="checkbox" name="category" value="tablets">
+                                    <span class="checkmark"></span>
+                                    <span class="label-text">Tablets</span>
+                                    <span class="count">16</span>
+                                </label>
+                            </li>
+                            <li>
+                                <label class="custom-checkbox">
+                                    <input type="checkbox" name="category" value="laptops">
+                                    <span class="checkmark"></span>
+                                    <span class="label-text">Laptops</span>
+                                    <span class="count">28</span>
+                                </label>
+                            </li>
+                            <li>
+                                <label class="custom-checkbox">
+                                    <input type="checkbox" name="category" value="smartwatches">
+                                    <span class="checkmark"></span>
+                                    <span class="label-text">Smartwatches</span>
+                                    <span class="count">19</span>
+                                </label>
+                            </li>
+                            <li>
+                                <label class="custom-checkbox">
+                                    <input type="checkbox" name="category" value="audio">
+                                    <span class="checkmark"></span>
+                                    <span class="label-text">Audio</span>
+                                    <span class="count">32</span>
+                                </label>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <h4 class="filter-title">Price Range</h4>
+                        <div class="price-slider-container">
+                            <div id="price-slider"></div>
+                            <div class="price-inputs">
+                                <div class="price-input">
+                                    <span class="currency">$</span>
+                                    <input type="number" id="price-min" value="0">
+                                </div>
+                                <span class="price-separator">-</span>
+                                <div class="price-input">
+                                    <span class="currency">$</span>
+                                    <input type="number" id="price-max" value="2000">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <h4 class="filter-title">Brands</h4>
+                        <ul class="filter-list brand-list">
+                            <li>
+                                <label class="custom-checkbox">
+                                    <input type="checkbox" name="brand" value="apple">
+                                    <span class="checkmark"></span>
+                                    <span class="label-text">Apple</span>
+                                </label>
+                            </li>
+                            <li>
+                                <label class="custom-checkbox">
+                                    <input type="checkbox" name="brand" value="samsung">
+                                    <span class="checkmark"></span>
+                                    <span class="label-text">Samsung</span>
+                                </label>
+                            </li>
+                            <li>
+                                <label class="custom-checkbox">
+                                    <input type="checkbox" name="brand" value="google">
+                                    <span class="checkmark"></span>
+                                    <span class="label-text">Google</span>
+                                </label>
+                            </li>
+                            <li>
+                                <label class="custom-checkbox">
+                                    <input type="checkbox" name="brand" value="sony">
+                                    <span class="checkmark"></span>
+                                    <span class="label-text">Sony</span>
+                                </label>
+                            </li>
+                            <li>
+                                <label class="custom-checkbox">
+                                    <input type="checkbox" name="brand" value="xiaomi">
+                                    <span class="checkmark"></span>
+                                    <span class="label-text">Xiaomi</span>
+                                </label>
+                            </li>
+                        </ul>
+                        <button class="view-more-btn">+ View More</button>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <h4 class="filter-title">Ratings</h4>
+                        <ul class="filter-list rating-list">
+                            <li>
+                                <label class="custom-radio">
+                                    <input type="radio" name="rating" value="4-up">
+                                    <span class="radio-mark"></span>
+                                    <div class="stars">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="far fa-star"></i>
+                                    </div>
+                                    <span class="label-text">& Up</span>
+                                </label>
+                            </li>
+                            <li>
+                                <label class="custom-radio">
+                                    <input type="radio" name="rating" value="3-up">
+                                    <span class="radio-mark"></span>
+                                    <div class="stars">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="far fa-star"></i>
+                                        <i class="far fa-star"></i>
+                                    </div>
+                                    <span class="label-text">& Up</span>
+                                </label>
+                            </li>
+                            <li>
+                                <label class="custom-radio">
+                                    <input type="radio" name="rating" value="2-up">
+                                    <span class="radio-mark"></span>
+                                    <div class="stars">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="far fa-star"></i>
+                                        <i class="far fa-star"></i>
+                                        <i class="far fa-star"></i>
+                                    </div>
+                                    <span class="label-text">& Up</span>
+                                </label>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <h4 class="filter-title">Product Status</h4>
+                        <ul class="filter-list status-list">
+                            <li>
+                                <label class="custom-checkbox">
+                                    <input type="checkbox" name="status" value="in-stock">
+                                    <span class="checkmark"></span>
+                                    <span class="label-text">In Stock</span>
+                                </label>
+                            </li>
+                            <li>
+                                <label class="custom-checkbox">
+                                    <input type="checkbox" name="status" value="on-sale">
+                                    <span class="checkmark"></span>
+                                    <span class="label-text">On Sale</span>
+                                </label>
+                            </li>
+                            <li>
+                                <label class="custom-checkbox">
+                                    <input type="checkbox" name="status" value="new-arrival">
+                                    <span class="checkmark"></span>
+                                    <span class="label-text">New Arrivals</span>
+                                </label>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <button class="btn primary-btn apply-filters-btn" id="apply-filters">Apply Filters</button>
+                </aside>
+                
+                <!-- Right side - Products list -->
+                <div class="products-container">
+                    <div class="products-header" data-aos="fade-left" data-aos-duration="600">
+                        <div class="products-count">
+                            <span id="products-total">48 Products</span>
+                        </div>
+                        <div class="products-sorting">
+                            <label for="sort-by">Sort By:</label>
+                            <select id="sort-by" class="sort-select">
+                                <option value="featured">Featured</option>
+                                <option value="newest">Newest Arrivals</option>
+                                <option value="price-low">Price: Low to High</option>
+                                <option value="price-high">Price: High to Low</option>
+                                <option value="rating">Top Rated</option>
+                                <option value="popularity">Most Popular</option>
+                            </select>
+                        </div>
+                        <div class="view-options">
+                            <button class="view-btn grid-view active" data-view="grid">
+                                <i class="fas fa-th"></i>
+                            </button>
+                            <button class="view-btn list-view" data-view="list">
+                                <i class="fas fa-list"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Active filters tags -->
+                    <div class="active-filters" data-aos="fade-up" data-aos-duration="600">
+                        <div class="filter-tag">
+                            <span>Smartphones</span>
+                            <button class="remove-filter"><i class="fas fa-times"></i></button>
+                        </div>
+                        <div class="filter-tag">
+                            <span>$100 - $1000</span>
+                            <button class="remove-filter"><i class="fas fa-times"></i></button>
+                        </div>
+                        <div class="filter-tag">
+                            <span>In Stock</span>
+                            <button class="remove-filter"><i class="fas fa-times"></i></button>
+                        </div>
+                        <button class="clear-filters-btn">Clear All</button>
+                    </div>
+                    
+                    <!-- Products grid -->
+                    <div class="products-grid" id="products-grid">
+                        <!-- Product items will be dynamically added with JavaScript -->
+                    </div>
+                    
+                    <!-- Pagination -->
+                    <div class="pagination-container" data-aos="fade-up">
+                        <button class="pagination-btn prev"><i class="fas fa-chevron-left"></i></button>
+                        <div class="pagination-numbers">
+                            <button class="pagination-number active">1</button>
+                            <button class="pagination-number">2</button>
+                            <button class="pagination-number">3</button>
+                            <span class="pagination-ellipsis">...</span>
+                            <button class="pagination-number">10</button>
+                        </div>
+                        <button class="pagination-btn next"><i class="fas fa-chevron-right"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <!-- Recently viewed section -->
+    <section class="recently-viewed-section">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">Recently Viewed</h2>
+            <div class="recently-viewed-slider" data-aos="fade-up" data-aos-delay="200">
+                <!-- Items will be added by JavaScript -->
+            </div>
+        </div>
+    </section>
+    
+    <section class="newsletter">
+        <div class="newsletter-container" data-aos="fade-up">
+            <h2>Stay Updated</h2>
+            <p>Subscribe to our newsletter for the latest product updates and exclusive offers.</p>
+            <form class="newsletter-form">
+                <input type="email" placeholder="Enter your email" required>
+                <button type="submit" class="btn primary-btn">Subscribe</button>
+            </form>
+        </div>
+    </section>
+
+    <footer class="main-footer">
+        <div class="footer-container">
+            <div class="footer-column">
+                <h3>TechHub</h3>
+                <p>Your destination for premium gadgets and cutting-edge technology.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h4>Shop</h4>
+                <ul>
+                    <li><a href="pages/category.html?cat=smartphones">Smartphones</a></li>
+                    <li><a href="pages/category.html?cat=tablets">Tablets</a></li>
+                    <li><a href="pages/category.html?cat=audio">Audio</a></li>
+                    <li><a href="pages/category.html?cat=laptops">Laptops</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Information</h4>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms & Conditions</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Contact</h4>
+                <ul class="contact-info">
+                    <li><i class="fas fa-map-marker-alt"></i> 123 Tech Street, City, Country</li>
+                    <li><i class="fas fa-phone"></i> +123 456 7890</li>
+                    <li><i class="fas fa-envelope"></i> info@techhub.com</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 TechHub. All rights reserved.</p>
+        </div>
+    </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.6.1/nouislider.min.js"></script>
+    <script src="../assets/js/main.js"></script>
+    <script src="../assets/js/product.js"></script>
+</body>
+</html>

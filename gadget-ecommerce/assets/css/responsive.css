@@ -1,0 +1,233 @@
+/* Responsive Styles */
+
+/* Large devices (laptops/desktops, up to 1200px) */
+@media screen and (max-width: 1200px) {
+    .hero-content h1 {
+      font-size: 3rem;
+    }
+    
+    .hero-content p {
+      max-width: 100%;
+    }
+    
+    .categories-container {
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+    }
+    
+    .product-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  
+  /* Medium devices (tablets, up to 992px) */
+  @media screen and (max-width: 992px) {
+    .menu-toggle {
+      display: block;
+      cursor: pointer;
+    }
+    
+    .main-nav {
+      position: fixed;
+      top: 70px;
+      left: -100%;
+      width: 100%;
+      height: calc(100vh - 70px);
+      background-color: rgba(255, 255, 255, 0.97);
+      transition: 0.3s;
+      z-index: 100;
+    }
+    
+    .main-nav.active {
+      left: 0;
+    }
+    
+    .main-nav ul {
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      gap: 3rem;
+      padding: 2rem;
+    }
+    
+    .main-nav a {
+      font-size: 1.2rem;
+    }
+    
+    .hero {
+      flex-direction: column;
+      height: auto;
+      padding: 3rem 2rem;
+      gap: 2rem;
+    }
+    
+    .hero-content,
+    .hero-image {
+      width: 100%;
+      text-align: center;
+    }
+    
+    .hero-image img {
+      max-width: 80%;
+      margin: 0 auto;
+    }
+    
+    .categories-container {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+    }
+    
+    .product-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+    }
+    
+    .product-spotlight {
+      flex-direction: column;
+      padding: 3rem 2rem;
+    }
+    
+    .spotlight-content,
+    .spotlight-image {
+      width: 100%;
+      text-align: center;
+    }
+    
+    .spotlight-image img {
+      max-width: 80%;
+      margin: 2rem auto 0;
+    }
+    
+    .about-section {
+      flex-direction: column;
+      padding: 3rem 2rem;
+    }
+    
+    .about-image,
+    .about-content {
+      width: 100%;
+      text-align: center;
+    }
+    
+    .about-features {
+      justify-content: center;
+    }
+    
+    .newsletter-container {
+      width: 90%;
+    }
+  }
+  
+  /* Small devices (landscape phones, up to 768px) */
+  @media screen and (max-width: 768px) {
+    .header-container {
+      padding: 1rem;
+    }
+    
+    .hero-content h1 {
+      font-size: 2.5rem;
+    }
+    
+    .hero-content h2 {
+      font-size: 1.2rem;
+    }
+    
+    .hero-buttons {
+      flex-direction: column;
+      width: 100%;
+      max-width: 300px;
+      margin: 0 auto;
+    }
+    
+    .hero-buttons .btn {
+      width: 100%;
+      margin: 0.5rem 0;
+    }
+    
+    .section-title {
+      font-size: 1.8rem;
+    }
+    
+    .product-grid {
+      grid-template-columns: 1fr;
+      max-width: 350px;
+      margin: 0 auto;
+    }
+    
+    .spotlight-content h2 {
+      font-size: 1.5rem;
+    }
+    
+    .spotlight-content h3 {
+      font-size: 2rem;
+    }
+    
+    .feature-list li {
+      font-size: 0.9rem;
+    }
+    
+    .footer-container {
+      flex-direction: column;
+      text-align: center;
+      gap: 2rem;
+    }
+    
+    .footer-column {
+      width: 100%;
+    }
+    
+    .footer-links {
+      justify-content: center;
+    }
+  }
+  
+  /* Extra small devices (phones, up to 576px) */
+  @media screen and (max-width: 576px) {
+    .logo h1 {
+      font-size: 1.5rem;
+    }
+    
+    .nav-icons a {
+      margin-left: 0.8rem;
+    }
+    
+    .cart-count {
+      font-size: 0.6rem;
+      width: 16px;
+      height: 16px;
+    }
+    
+    .hero-content h1 {
+      font-size: 2rem;
+    }
+    
+    .categories-container {
+      grid-template-columns: 1fr;
+      max-width: 300px;
+      margin: 0 auto;
+    }
+    
+    .newsletter-form {
+      flex-direction: column;
+      gap: 1rem;
+    }
+    
+    .newsletter-form input,
+    .newsletter-form button {
+      width: 100%;
+    }
+    
+    .about-features li {
+      width: 100%;
+      text-align: left;
+      padding: 0.5rem 0;
+    }
+  }
+  
+  /* Animation adjustments for small screens */
+  @media screen and (max-width: 768px) {
+    [data-aos-delay] {
+      transition-delay: 0 !important;
+    }
+  }
